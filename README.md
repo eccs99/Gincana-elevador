@@ -15,7 +15,7 @@ O sistema recebe chamadas de um andar de origem com múltiplos destinos, selecio
 
 ---
 
-## 🏗️ Estrutura do Prédio
+## Estrutura do Prédio
 
 | Andar | Descrição     |
 |-------|---------------|
@@ -39,7 +39,7 @@ O sistema recebe chamadas de um andar de origem com múltiplos destinos, selecio
 
 ---
 
-## 🚀 Como Executar
+##  Como Executar
 
 ### Versão Terminal
 
@@ -62,7 +62,7 @@ Acesse `http://localhost:5000` no navegador.
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 - Python 3.x
 - Flask (versão web)
@@ -83,12 +83,12 @@ Acesse `http://localhost:5000` no navegador.
 
 ---
 
-## 👥 Equipe
+##  Equipe
 
-> Adicione aqui os nomes dos integrantes do grupo.
-
+> Diogo Gouvêa
+  Eric Santos  
+  Fábio Silveira
+  Yuri Bering
 ---
 
-## 📄 Licença
 
-Projeto acadêmico sem fins comerciais — Faculdade SENAC.
