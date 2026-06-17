@@ -4,7 +4,6 @@
 Trabalho acadêmico desenvolvido para a **Gincana Python** da Faculdade SENAC, sob orientação da Profª Maristela. O projeto simula o controle de dois elevadores simultâneos em um prédio com 7 andares, priorizando eficiência no despacho e transporte de passageiros.
 
 ---
-
  Descrição
 
 O sistema recebe chamadas de um andar de origem com múltiplos destinos, seleciona o elevador mais próximo com base no cálculo de distância (`abs()`), transporta os passageiros em lotes de até 8 pessoas e registra estatísticas de uso ao final. Ao ficar ocioso, cada elevador retorna ao seu andar de repouso padrão.
@@ -86,9 +85,9 @@ Acesse `http://localhost:5000` no navegador.
   Equipe
 
 > Diogo Gouvêa
-  Eric Santos  
-  Fábio Silveira
-  Yuri Bering
+> Eric Santos
+> Fábio Silveira
+> Yuri Bering
 ---
 
 
