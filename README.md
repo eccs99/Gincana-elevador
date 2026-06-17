@@ -1,5 +1,5 @@
 # Gincana-elevador
- Sistema de Elevadores Inteligentes — SENAC
+ Sistema de Elevadores Inteligentes  SENAC
 
 Trabalho acadêmico desenvolvido para a **Gincana Python** da Faculdade SENAC, sob orientação da Profª Maristela. O projeto simula o controle de dois elevadores simultâneos em um prédio com 7 andares, priorizando eficiência no despacho e transporte de passageiros.
 
@@ -71,22 +71,25 @@ Acesse `http://localhost:5000` no navegador.
 
  Funcionalidades
 
-- [x] Controle de 2 elevadores simultâneos
-- [x] Seleção automática do elevador mais próximo
-- [x] Capacidade máxima de 8 passageiros por viagem
-- [x] Suporte a múltiplos destinos por chamada
-- [x] Validação de entradas
-- [x] Modo de repouso automático
-- [x] Estatísticas de viagens e passageiros transportados
-- [x] Interface web animada (versão Flask)
+-  Controle de 2 elevadores simultâneos
+-  Seleção automática do elevador mais próximo
+-  Capacidade máxima de 8 passageiros por viagem
+-  Suporte a múltiplos destinos por chamada
+-  Validação de entradas
+-  Modo de repouso automático
+-  Estatísticas de viagens e passageiros transportados
+-  Interface web animada (versão Flask)
 
 ---
 
   Equipe
 
 > Diogo Gouvêa
+> 
 > Eric Santos
+> 
 > Fábio Silveira
+> 
 > Yuri Bering
 ---
 
