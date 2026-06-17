@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Elevadores SENAC - Dashboard Realista</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Verdana, sans-serif; background-color: #1a1a24; color: white; display: flex; justify-content: center; padding: 20px; }
+        .container { display: flex; gap: 40px; width: 1000px; }
+        
+        /* Painel de Controle */
+        .painel { background: #232333; padding: 25px; border-radius: 12px; width: 40%; box-shadow: 0 10px 30px rgba(0,0,0,0.8); border-top: 4px solid #00d2ff; }
+        input, button { width: 100%; padding: 12px; margin-top: 10px; border-radius: 6px; border: none; box-sizing: border-box; font-size: 14px; background: #3b3b55; color: white;}
+        button { background: #00d2ff; color: #000; font-weight: bold; cursor: pointer; margin-top: 25px; text-transform: uppercase; letter-spacing: 1px;}
+        button:hover { background: #00a8cc; }
+        button:disabled { background: #555; cursor: not-allowed; }
+        .log-box { background: #000; color: #0f0; padding: 15px; height: 180px; overflow-y: scroll; font-family: monospace; font-size: 12px; margin-top: 15px; border-radius: 6px; box-shadow: inset 0 0 10px #000;}
+        .stats { font-size: 13px; color: #ccc; margin-top: 15px; background: #111; padding: 15px; border-radius: 6px; border-left: 3px solid #ff007f;}
+
+        /* Prédio e Layout Atualizado */
+        .predio-container { width: 60%; display: flex; background: #222; border: 4px solid #444; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); padding: 10px; height: 500px; }
+        
+        .andares-nomes { width: 40%; display: flex; flex-direction: column-reverse; justify-content: space-around; padding-right: 15px; border-right: 2px dashed #555; }
+        .andar-label { height: 14.28%; display: flex; align-items: center; justify-content: flex-end; text-align: right; color: #ccc; font-size: 14px; line-height: 1.3; }
+        
+        .pocos { width: 60%; display: flex; position: relative; }
+        .poco { width: 50%; height: 100%; position: relative; background: linear-gradient(90deg, #111, #2a2a2a, #111); border-right: 2px dashed #333; display: flex; justify-content: center;}
+        
+        /* Cabines */
+        .cabine { position: absolute; width: 60px; height: 60px; bottom: 0; background: linear-gradient(to bottom, #d4d4d4, #888); border-radius: 4px; border: 2px solid #fff; box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; color: #000; z-index: 10;}
+        .cabine-A { box-shadow: 0 0 15px #00d2ff, inset 0 0 10px rgba(0,0,0,0.5); }
+        .cabine-B { box-shadow: 0 0 15px #ff007f, inset 0 0 10px rgba(0,0,0,0.5); }
+        .cabine.aberta { border-left: 15px solid #222; border-right: 15px solid #222; background: #666; color: white;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="painel">
+        <h2>🎛️ Terminal SENAC</h2>
+        <label>Seu Andar Atual:</label>
+        <input type="number" id="origem" min="-2" max="4" value="0">
+        
+        <label>Destinos (Ex: 2 4 -1 4 3):</label>
+        <input type="text" id="destinos" placeholder="Separe por espaço">
+        
+        <button id="btnChamar" onclick="chamarElevador()">CHAMAR ELEVADORES</button>
+        
+        <div class="log-box" id="terminal">Sistemas Online... Aguardando comandos.</div>
+
+        <div class="stats" id="stats">
+            <strong>📊 ESTATÍSTICAS FINAIS DE USO</strong><br>
+            Elevador A: 0 viagens | 0 usuários<br>
+            Elevador B: 0 viagens | 0 usuários<br>
+            Total Geral: 0 usuários atendidos
+        </div>
+    </div>
+
+    <div class="predio-container">
+        <div class="andares-nomes">
+            <div class="andar-label">
+                <div><b>Subsolo 2</b><br><span style="font-size: 11px; color: #777;">Garagem Inferior</span></div>
+            </div>
+            <div class="andar-label">
+                <div><b>Subsolo 1</b><br><span style="font-size: 11px; color: #777;">Garagem Superior</span></div>
+            </div>
+            <div class="andar-label">
+                <div><b>Térreo (0)</b><br><span style="font-size: 11px; color: #777;">Entrada Principal</span></div>
+            </div>
+            <div class="andar-label">
+                <div><b>1º Andar</b><br><span style="font-size: 11px; color: #777;">Sala de Aula</span></div>
+            </div>
+            <div class="andar-label">
+                <div><b>2º Andar</b><br><span style="font-size: 11px; color: #777;">Laboratórios</span></div>
+            </div>
+            <div class="andar-label">
+                <div><b>3º Andar</b><br><span style="font-size: 11px; color: #777;">Biblioteca</span></div>
+            </div>
+            <div class="andar-label">
+                <div><b>4º Andar</b><br><span style="font-size: 11px; color: #777;">Administração</span></div>
+            </div>
+        </div>
+        
+        <div class="pocos">
+            <div class="poco">
+                <div class="cabine cabine-A" id="elevador-A">A</div>
+            </div>
+            <div class="poco" style="border-right: none;">
+                <div class="cabine cabine-B" id="elevador-B">B</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let posFrontA = 0;
+    let posFrontB = 0;
+
+    function calcularPosicao(andar) {
+        return `calc(${(andar + 2) * 14.28}% + 5px)`;
+    }
+
+    function imprimirLog(texto, elevador = null) {
+        const terminal = document.getElementById('terminal');
+        let cor = "#0f0"; 
+        if (elevador === 'A') cor = "#00d2ff"; 
+        if (elevador === 'B') cor = "#ff007f"; 
+        
+        terminal.innerHTML += `> <span style="color:${cor}">${texto}</span><br>`;
+        terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    document.getElementById('elevador-A').style.bottom = calcularPosicao(0);
+    document.getElementById('elevador-B').style.bottom = calcularPosicao(0);
+
+    async function animarUmElevador(id, listaDePassos) {
+        if (!listaDePassos || listaDePassos.length === 0) return;
+        
+        const cabine = document.getElementById('elevador-' + id);
+        let andarAtual = id === 'A' ? posFrontA : posFrontB;
+        
+        for (let passo of listaDePassos) {
+            
+            if (passo.msg) imprimirLog(passo.msg, id);
+
+            if (passo.acao === 'mover') {
+                const distancia = Math.abs(passo.andar - andarAtual);
+                const tempoEmMilissegundos = distancia * 1000; 
+                
+                if (distancia > 0) {
+                    cabine.style.transition = `bottom ${tempoEmMilissegundos}ms linear`;
+                    cabine.style.bottom = calcularPosicao(passo.andar);
+                    await new Promise(r => setTimeout(r, tempoEmMilissegundos)); 
+                    andarAtual = passo.andar;
+                }
+            } 
+            else if (passo.acao === 'abrir_porta') {
+                cabine.classList.add('aberta');
+                cabine.innerHTML = passo.passageiros > 0 ? `🧍x${passo.passageiros}` : id;
+                await new Promise(r => setTimeout(r, 800)); 
+            }
+            else if (passo.acao === 'fechar_porta') {
+                cabine.classList.remove('aberta');
+                await new Promise(r => setTimeout(r, 400)); 
+            }
+        }
+
+        if (id === 'A') posFrontA = andarAtual;
+        else posFrontB = andarAtual;
+    }
+
+    async function chamarElevador() {
+        const origem = document.getElementById('origem').value;
+        const destinos = document.getElementById('destinos').value;
+        const terminal = document.getElementById('terminal');
+        const btn = document.getElementById('btnChamar');
+
+        const response = await fetch('/chamar', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({origem: origem, destinos: destinos})
+        });
+        
+        const data = await response.json();
+        
+        if(data.erro) {
+            imprimirLog(data.erro);
+            return;
+        }
+
+        btn.innerText = "EM MOVIMENTO...";
+        btn.disabled = true;
+        terminal.innerHTML = ""; 
+
+        data.logs_iniciais.forEach(linha => imprimirLog(linha));
+
+        await Promise.all([
+            animarUmElevador('A', data.passos.A),
+            animarUmElevador('B', data.passos.B)
+        ]);
+
+        imprimirLog("🎉 Todas as viagens concluídas e sistema em repouso!", "sistema");
+
+        const totalPessoas = data.sistema.pessoas_transportadas_a + data.sistema.pessoas_transportadas_b;
+        document.getElementById('stats').innerHTML = `
+            <strong>📊 ESTATÍSTICAS FINAIS DE USO</strong><br>
+            Elevador A: ${data.sistema.viagens_a} viagens | ${data.sistema.pessoas_transportadas_a} usuários<br>
+            Elevador B: ${data.sistema.viagens_b} viagens | ${data.sistema.pessoas_transportadas_b} usuários<br>
+            Total Geral: ${totalPessoas} usuários atendidos
+        `;
+
+        btn.innerText = "CHAMAR ELEVADORES";
+        btn.disabled = false;
+    }
+</script>
+</body>
+</html>
