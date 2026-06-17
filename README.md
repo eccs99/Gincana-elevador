@@ -1,11 +1,11 @@
 # Gincana-elevador
-# 🏢 Sistema de Elevadores Inteligentes — SENAC
+ Sistema de Elevadores Inteligentes — SENAC
 
 Trabalho acadêmico desenvolvido para a **Gincana Python** da Faculdade SENAC, sob orientação da Profª Maristela. O projeto simula o controle de dois elevadores simultâneos em um prédio com 7 andares, priorizando eficiência no despacho e transporte de passageiros.
 
 ---
 
-## 📋 Descrição
+ Descrição
 
 O sistema recebe chamadas de um andar de origem com múltiplos destinos, seleciona o elevador mais próximo com base no cálculo de distância (`abs()`), transporta os passageiros em lotes de até 8 pessoas e registra estatísticas de uso ao final. Ao ficar ocioso, cada elevador retorna ao seu andar de repouso padrão.
 
@@ -15,7 +15,7 @@ O sistema recebe chamadas de um andar de origem com múltiplos destinos, selecio
 
 ---
 
-## Estrutura do Prédio
+ Estrutura do Prédio
 
 | Andar | Descrição     |
 |-------|---------------|
@@ -29,7 +29,7 @@ O sistema recebe chamadas de um andar de origem com múltiplos destinos, selecio
 
 ---
 
-## ⚙️ Lógica de Funcionamento
+ Lógica de Funcionamento
 
 1. **Seleção do elevador:** o sistema calcula qual elevador está mais próximo do andar de origem e o despacha primeiro.
 2. **Lotação:** passageiros são agrupados em lotes de até 8. Se houver mais de 8 destinos, o segundo elevador é acionado em rodadas alternadas.
@@ -39,9 +39,9 @@ O sistema recebe chamadas de um andar de origem com múltiplos destinos, selecio
 
 ---
 
-##  Como Executar
+  Como Executar
 
-### Versão Terminal
+ Versão Terminal
 
 ```bash
 python main.py
@@ -62,7 +62,7 @@ Acesse `http://localhost:5000` no navegador.
 
 ---
 
-##  Tecnologias Utilizadas
+  Tecnologias Utilizadas
 
 - Python 3.x
 - Flask (versão web)
@@ -70,7 +70,7 @@ Acesse `http://localhost:5000` no navegador.
 
 ---
 
-## 📊 Funcionalidades
+ Funcionalidades
 
 - [x] Controle de 2 elevadores simultâneos
 - [x] Seleção automática do elevador mais próximo
@@ -83,7 +83,7 @@ Acesse `http://localhost:5000` no navegador.
 
 ---
 
-##  Equipe
+  Equipe
 
 > Diogo Gouvêa
   Eric Santos  
